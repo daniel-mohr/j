@@ -132,7 +132,7 @@ jobs:
       - name: cat test script
         run: cat do_test
       - name: run my script in docker image
-        uses: daniel-mohr/amd64_opensuse_leap_15.2@v0
+        uses: daniel-mohr/amd64_opensuse_leap_15.2@v1
         with:
           cmdfile: ./do_test
 
