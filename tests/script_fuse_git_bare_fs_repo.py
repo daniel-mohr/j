@@ -15,7 +15,7 @@ You can run this file directly::
 Or you can run only one test, e. g.::
 
   env python3 script_fuse_git_bare_fs_repo.py \
-    script_fuse_git_bare_fs_repo.test_fuse_git_bare_fs_repo
+    ScriptFuseGitBareFsRepo.test_fuse_git_bare_fs_repo
 
   pytest-3 -k test_fuse_git_bare_fs_repo script_fuse_git_bare_fs_repo.py
 """
@@ -93,6 +93,8 @@ class ScriptFuseGitBareFsRepo(unittest.TestCase):
 
         This test creates a repo, put some files in and
         mount it, check for fiels.
+
+        env python3 script_fuse_git_bare_fs_repo.py ScriptFuseGitBareFsRepo.test_fuse_git_bare_fs_repo_daemon1
         """
         # pylint: disable=invalid-name,too-many-statements
         serverdir = 'server'
@@ -113,12 +115,15 @@ class ScriptFuseGitBareFsRepo(unittest.TestCase):
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                 shell=True, cwd=os.path.join(tmpdir, clientdir),
                 timeout=3, check=True)
-            subprocess.run(
+            cp = subprocess.run(
                 ['echo "a">a; echo "b">b; ln -s a l; mkdir d; echo "abc">d/c;'
                  'git add a b l d/c; git commit -m init; git push'],
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                 shell=True, cwd=os.path.join(tmpdir, clientdir, reponame),
-                timeout=3, check=True)
+                timeout=3, check=False)
+            print('cp.stdout', cp.stdout)
+            print('cp.stderr', cp.stderr)
+            self.assertEqual(cp.returncode, 0)
             # run tests
             subprocess.run(
                 ['fuse_git_bare_fs repo -daemon ' +
