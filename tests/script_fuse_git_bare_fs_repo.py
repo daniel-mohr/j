@@ -125,13 +125,16 @@ class ScriptFuseGitBareFsRepo(unittest.TestCase):
             print('cp.stderr', cp.stderr)
             self.assertEqual(cp.returncode, 0)
             # run tests
-            subprocess.run(
+            cp = subprocess.run(
                 ['fuse_git_bare_fs repo -daemon ' +
                  os.path.join(serverdir, reponame) + ' ' +
                  mountpointdir],
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                 shell=True, cwd=tmpdir,
-                timeout=3, check=True)
+                timeout=3, check=False)
+            print('cp.stdout', cp.stdout)
+            print('cp.stderr', cp.stderr)
+            self.assertEqual(cp.returncode, 0)
             dt0 = time.time()
             while time.time() - dt0 < 3:  # wait up to 3 seconds for mounting
                 # typical it needs less than 0.2 seconds
