@@ -110,7 +110,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: run test_suite in opensuse/leap:15.2
-        run: sudo docker run --mount type=bind,source=$(pwd),destination=/app --rm -it --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined -v "/var/run/docker.sock":"/var/run/docker.sock" --tty=true opensuse/leap:15.2 app/.github/workflows/do_test_opensuse_leap:15.2
+        run: sudo docker run --mount type=bind,source=$(pwd),destination=/app --rm --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined -v "/var/run/docker.sock":"/var/run/docker.sock" opensuse/leap:15.2 app/.github/workflows/do_test_opensuse_leap:15.2
 
   opensuse_leap_153_test:
     runs-on: ubuntu-latest
@@ -120,7 +120,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: run test_suite in opensuse/leap:15.3
-        run: sudo docker run --mount type=bind,source=$(pwd),destination=/app --rm -it --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined -v "/var/run/docker.sock":"/var/run/docker.sock" --tty=true opensuse/leap:15.3 app/.github/workflows/do_test_opensuse_leap:15.3
+        run: sudo docker run --mount type=bind,source=$(pwd),destination=/app --rm --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined -v "/var/run/docker.sock":"/var/run/docker.sock" opensuse/leap:15.3 app/.github/workflows/do_test_opensuse_leap:15.3
 
   deploy_pages:
     if: ${{ false }}
