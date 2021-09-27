@@ -135,7 +135,7 @@ jobs:
           echo "test -n \"$(git config user.email)\" || git config --global user.email $(git config user.name)@$hostname" >> do_test
           echo "pip3 install ." >> do_test
 
-          echo "ls -lah /dev/fuse" >> do_test
+          echo "ls -lah /dev/" >> do_test
           echo "fusermount -V" >> do_test
           echo "mkdir ../foo" >> do_test
           echo "fuse_git_bare_fs repo ./ ../foo" >> do_test
