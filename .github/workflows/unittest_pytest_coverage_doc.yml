@@ -110,6 +110,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: apt-get update
+        run: sudo apt-get update
+      - name: ls
+        run: ls -lah /dev/
+      - name: install dependencies (ubuntu packages)
+        run: sudo apt-get install fuse
+      - name: ls
+        run: ls -lah /dev/fuse
       - name: create test script for docker
         # git-annex is not official for openSUSE Leap 15.2
         # but experimental is available and seems to work:
